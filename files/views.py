@@ -2,20 +2,14 @@
 from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
-from rest_framework.decorators import action,permission_classes
+from rest_framework.decorators import action
 from django.http import FileResponse
 from django.shortcuts import get_object_or_404
-from cryptography.fernet import Fernet
-import base64
-import os
 from .models import File
 from .serializers import FileSerializer
 from .permissions import IsOpsUser,IsClientUser
 from django.conf import settings  
 from .encryption_util import encrypt,decrypt
-
-
-
 
 class FileViewSet(viewsets.ModelViewSet):
     queryset = File.objects.all()
@@ -42,7 +36,6 @@ class FileViewSet(viewsets.ModelViewSet):
         serializer.save(uploaded_by=self.request.user)
    
             
-    
     @action(detail=True, methods=['get'], permission_classes=[permissions.IsAuthenticated,IsClientUser])
     def download_link(self, request, pk=None):
         encrypted_url = f"http://{settings.DOMAIN}/api/files/{encrypt(pk)}/download/"
