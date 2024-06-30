@@ -33,3 +33,7 @@ File Operations:-
 5. Only pptx,docx, and xlsx type files are allowed to be uploaded
    
 **Note** Sample Postman dump is provided as postman_dump.json
+
+**Tests**: I have  tested features using Postman collections
+
+**Deployment**: I  refrained from using environment variables for storing confidential keys and rather has manually defined it in configuration to make it easier to execute and test.In Production level deployment this should be avoided. I plan to deploy it on pythonanywhere.com(already 2 web apps, 2 Rest API deployed)  which is extremely useful tool and provides CI/CD to automate maintenance.
